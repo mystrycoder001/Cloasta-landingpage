@@ -430,18 +430,31 @@
     </div>
 </footer>
 
-<!-- Checkout Modal -->
+<!-- Premium Checkout Modal -->
 <div class="modal-overlay" id="checkoutModal">
-    <div class="modal-content glass-panel" style="position: relative;">
+    <div class="modal-content glass-panel">
         <button class="modal-close" id="closeModal">&times;</button>
-        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(207, 188, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        
+        <div class="modal-header">
+            <div class="modal-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <h3 class="modal-title">Where should we send it?</h3>
+            <p class="modal-subtitle">Enter your email to receive your Cloasta Pro download link, setup guide, and receipt.</p>
         </div>
-        <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Where should we send it?</h3>
-        <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Enter your email to receive your Cloasta Pro download link, setup guide, and payment confirmation.</p>
-        <input type="email" id="checkoutEmail" class="modal-input" placeholder="you@example.com" required>
-        <button id="continuePaymentBtn" class="btn btn-primary" style="width: 100%;">Continue to Payment</button>
-        <div id="paymentError" style="color: #ffb4ab; font-size: 0.875rem; margin-top: 1rem; display: none;"></div>
+        
+        <div class="modal-body">
+            <div class="input-group">
+                <label for="checkoutEmail" class="input-label">Email Address</label>
+                <input type="email" id="checkoutEmail" class="modal-input" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            
+            <button id="continuePaymentBtn" class="btn btn-primary modal-btn">
+                <span>Continue to Payment</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </button>
+            <div id="paymentError" class="modal-error"></div>
+        </div>
     </div>
 </div>
 
@@ -454,6 +467,16 @@
     const continueBtn = document.getElementById('continuePaymentBtn');
     const errorDiv = document.getElementById('paymentError');
 
+    // Default API base (empty means relative to current domain)
+    // If running locally, you may need to point this to your local backend
+    let API_BASE = ''; 
+    if (window.location.protocol === 'file:') {
+        console.warn('Running from file://. API calls will fail unless API_BASE is set to a full URL (e.g. https://your-vercel.vercel.app)');
+    } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        // Uncomment and change port if backend is running locally on a different port
+        // API_BASE = 'http://localhost:3000';
+    }
+
     checkoutBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -464,11 +487,14 @@
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('active');
+        errorDiv.style.display = 'none';
     });
 
-    // Close on overlay click
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            errorDiv.style.display = 'none';
+        }
     });
 
     continueBtn.addEventListener('click', async () => {
@@ -486,14 +512,23 @@
 
         try {
             // 1. Create Order
-            const orderRes = await fetch('/api/create-order', {
+            console.log('Fetching order from:', API_BASE + '/api/create-order');
+            const orderRes = await fetch(API_BASE + '/api/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ plan_tier: 'pro', email: email })
             });
-            const orderData = await orderRes.json();
             
-            if (!orderRes.ok) throw new Error(orderData.error || 'Failed to initialize payment.');
+            let orderData;
+            try {
+                orderData = await orderRes.json();
+            } catch (parseError) {
+                console.error('Failed to parse API response. Status:', orderRes.status);
+                throw new Error('API returned invalid format. Are you running this via a local server? (Cannot use file:// protocol)');
+            }
+            
+            if (!orderRes.ok) throw new Error(orderData.error || `Server returned ${orderRes.status}`);
+            if (!orderData.order_id) throw new Error('Order ID missing from API response.');
 
             // 2. Init Razorpay
             const options = {
@@ -510,7 +545,7 @@
                     
                     // 3. Verify Payment
                     try {
-                        const verifyRes = await fetch('/api/verify-payment', {
+                        const verifyRes = await fetch(API_BASE + '/api/verify-payment', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
@@ -527,6 +562,7 @@
                         // 4. Redirect to Success ONLY after verified
                         window.location.href = 'success.html';
                     } catch (err) {
+                        console.error('Verification error:', err);
                         errorDiv.textContent = err.message;
                         errorDiv.style.display = 'block';
                         continueBtn.innerHTML = 'Try Again';
@@ -535,9 +571,14 @@
                 }
             };
             
+            if (typeof Razorpay === 'undefined') {
+                throw new Error('Razorpay SDK failed to load. Please check your connection.');
+            }
+
             const rzp = new Razorpay(options);
             rzp.on('payment.failed', function (response){
-                errorDiv.textContent = 'Payment failed. Please try again.';
+                console.error('Razorpay payment failed:', response.error);
+                errorDiv.textContent = 'Payment failed: ' + (response.error.description || 'Unknown error');
                 errorDiv.style.display = 'block';
                 continueBtn.innerHTML = originalText;
                 continueBtn.disabled = false;
@@ -545,6 +586,7 @@
             
             rzp.open();
         } catch (err) {
+            console.error('Checkout error:', err);
             errorDiv.textContent = err.message;
             errorDiv.style.display = 'block';
             continueBtn.innerHTML = originalText;
