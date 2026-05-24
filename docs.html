@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation — Cloasta</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .docs-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+            align-items: start;
+        }
+        .docs-sidebar {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0.75rem;
+        }
+        .docs-sidebar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .docs-sidebar a:hover, .docs-sidebar a.active {
+            color: var(--primary);
+            background: rgba(207, 188, 255, 0.06);
+        }
+        .docs-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .docs-section {
+            scroll-margin-top: 120px;
+        }
+        .docs-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+        .docs-section p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        @media (max-width: 768px) {
+            .docs-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .docs-sidebar {
+                position: static;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">Cloasta</a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#security">Security</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+            <a href="index.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Back to Home</a>
+        </div>
+    </nav>
+</header>
+
+<main style="flex: 1; padding: 4rem 0;">
+    <div class="container">
+        <div style="margin-bottom: 3rem;">
+            <span class="product-badge" style="margin-bottom: 0.75rem;">Documentation</span>
+            <h1 style="font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.02em;">Cloasta User Guide</h1>
+            <p style="color: var(--text-muted); font-size: 1.125rem;">Everything you need to set up, secure, and optimize your multi-model AI sessions.</p>
+        </div>
+
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                <a href="#quickstart" class="active">Quick Start</a>
+                <a href="#installation">Installation Guide</a>
+                <a href="#sessionsync">AI Session Sync</a>
+                <a href="#optimization">Prompt Optimization</a>
+                <a href="#security">Privacy & Encryption</a>
+            </aside>
+
+            <div class="docs-content">
+                <section id="quickstart" class="docs-section">
+                    <h2>Quick Start</h2>
+                    <p>Cloasta is a modern browser extension that optimizes prompt generation, tracks memory logs locally across AI platforms, and provides seamless context switching between models like ChatGPT, Claude, Gemini, and DeepSeek.</p>
+                    <p>By saving context locally in browser memory and optimizing prompts before they leave your device, Cloasta serves as an intelligence bridge for your daily AI-driven tasks.</p>
+                </section>
+
+                <section id="installation" class="docs-section">
+                    <h2>Installation Guide</h2>
+                    <p>To manually install Cloasta Pro after downloading the package, follow these step-by-step instructions:</p>
+                    <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem;">
+                        <ol style="margin: 0; padding-left: 1.25rem; color: var(--text-main); line-height: 1.8; font-size: 0.9rem;">
+                            <li>Extract the downloaded <code>cloasta-pro.zip</code> file onto your computer.</li>
+                            <li>Open Google Chrome or any Chromium browser and navigate to <code style="color: var(--primary);">chrome://extensions</code>.</li>
+                            <li>Toggle the <strong>Developer Mode</strong> switch in the top-right corner of the extensions page.</li>
+                            <li>Click the <strong>Load unpacked</strong> button in the top-left corner.</li>
+                            <li>Select the directory where you extracted the zip folder.</li>
+                            <li>Cloasta is now installed and accessible from your extension bar!</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="sessionsync" class="docs-section">
+                    <h2>AI Session Sync</h2>
+                    <p>Synchronize conversations in real-time. When you're using one AI tab, Cloasta Indexes the session locally. If you need to switch models, click the Cloasta icon or press <kbd style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-family: monospace;">Alt + S</kbd> to copy the exact conversational state directly into another model's input prompt.</p>
+                    <p>No cloud storage is used. Everything resides in your Chromium browser local memory storage.</p>
+                </section>
+
+                <section id="optimization" class="docs-section">
+                    <h2>Prompt Optimization</h2>
+                    <p>Use our local prompt engine to turn raw messages into structured instructions. The extension adds a small floating icon inside the chatboxes of major AI websites. Clicking it runs the input text through advanced template systems, producing optimized prompts with custom system roles, parameters, and constraints.</p>
+                </section>
+
+                <section id="security" class="docs-section">
+                    <h2>Privacy & Encryption</h2>
+                    <p>Cloasta takes privacy seriously. Unlike cloud tools that process your prompts on external servers, Cloasta performs all memory storage and local search indexing strictly inside the sandboxed environment of your local browser instance.</p>
+                    <p>All stored keys, prompts, and tokens are encrypted with military-grade AES-256 local keys generated specifically for your profile.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="container" style="margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; padding-bottom: 2rem;">
+    <div class="footer-content" style="border-top: none;">
+        <div>
+            <a href="index.html" class="logo" style="margin-bottom: 0.5rem; display: block;">Cloasta</a>
+            <p style="margin: 0; font-size: 0.875rem; color: var(--text-muted);">Intelligence for the modern web.<br>Captured, refined, and private.</p>
+        </div>
+        <div style="font-size: 0.875rem; color: var(--text-muted);">
+            © 2026 Cloasta AI. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Smooth scrolling & active state highlights for sidebar nav
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar a');
+    const sections = document.querySelectorAll('.docs-section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        sidebarLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
