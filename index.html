@@ -584,6 +584,10 @@
                 continueBtn.disabled = false;
             });
             
+            // Reset button when Razorpay popup opens (user can see it)
+            continueBtn.innerHTML = originalText;
+            continueBtn.disabled = false;
+            
             rzp.open();
         } catch (err) {
             console.error('Checkout error:', err);

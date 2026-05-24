@@ -1,0 +1,9 @@
+{
+  "name": "cloasta-landing",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "node-fetch": "^2.6.9",
+    "razorpay": "^2.9.2"
+  }
+}
