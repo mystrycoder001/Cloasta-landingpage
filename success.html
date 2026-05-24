@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Successful — Cloasta Pro</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">Cloasta</a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#security">Security</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 0;">
+    <section class="container" style="max-width: 800px;">
+        <div class="glass-panel" style="padding: 3rem; text-align: center; border-top: 4px solid var(--primary);">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(207, 188, 255, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Payment Successful</h1>
+            <p style="font-size: 1.125rem; color: var(--text-main); margin-bottom: 2rem;">
+                Welcome to Cloasta Pro. Your download should start automatically in a moment.
+            </p>
+            
+            <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.02); text-align: left; margin-bottom: 2rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary);">Installation Guide</h3>
+                <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-main); line-height: 1.8;">
+                    <li>Extract the downloaded <code>cloasta-pro.zip</code> file to a folder.</li>
+                    <li>Open Chrome and navigate to <code>chrome://extensions</code>.</li>
+                    <li>Enable <strong>Developer Mode</strong> in the top-right corner.</li>
+                    <li>Click <strong>Load Unpacked</strong> and select the extracted folder.</li>
+                </ol>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+                Your Cloasta Pro download link has also been sent to the email you provided.<br>
+                If you experience any issues, contact: <a href="mailto:cloastaofficial@gmail.com" style="color: var(--primary); text-decoration: none;">cloastaofficial@gmail.com</a>
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <a href="/cloasta-pro.zip" class="btn btn-secondary" id="manualDownloadBtn">Click here if download didn't start</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="container">
+    <div class="footer-content" style="border-top: none;">
+        <div style="text-align: center; width: 100%;">
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">© 2026 Cloasta. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Automatically trigger the download
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = '/cloasta-pro.zip';
+            link.download = 'cloasta-pro.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, 1500); // Wait a tiny bit so the user sees the page
+    });
+</script>
+
+</body>
+</html>
