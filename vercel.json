@@ -22,5 +22,10 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/private/(.*)", "destination": "/404" }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "private/**"
+    }
+  }
 }
