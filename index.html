@@ -122,7 +122,7 @@
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
-            <button class="btn btn-primary">Add to Chrome — Free</button>
+            <a href="free-download.html" class="btn btn-primary" style="text-decoration: none;">Download Cloasta Free</a>
         </div>
     </nav>
 </header>
@@ -138,10 +138,10 @@
         <p>A cross-AI workflow memory tool. Capture everything you read, run prompt optimization, and bridge the gap between ChatGPT, Claude, Gemini, DeepSeek, and Copilot with one powerful extension.</p>
         
         <div class="hero-actions">
-            <button class="btn btn-primary">
-                Add to Chrome — Free
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-            </button>
+            <a href="free-download.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                Download Cloasta Free
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
             <button class="btn btn-secondary checkout-btn">Get Lifetime Access — $29</button>
         </div>
         
@@ -399,10 +399,10 @@
                 <h2 style="font-size: 3rem; margin-bottom: 1rem;">Ready to upgrade your AI workflow?</h2>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">Join 10k+ researchers, developers, and writers who use Cloasta to supercharge their daily productivity.</p>
                 <div class="hero-actions" style="margin-bottom: 0;">
-                    <button class="btn btn-secondary" style="background: white; color: black; border-color: white;">
-                        Add to Chrome Free
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-                    </button>
+                    <a href="free-download.html" class="btn btn-secondary" style="background: white; color: black; border-color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                        Download Cloasta Free
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                    </a>
                     <a href="docs.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View Documentation</a>
                 </div>
             </div>
@@ -684,7 +684,12 @@
                         }
                         
                         console.log('Payment verified successfully! Redirecting to success page...');
-                        window.location.href = 'success.html';
+                        if (verifyData.token) {
+                            window.location.href = 'success.html?token=' + verifyData.token;
+                        } else {
+                            // Fallback if token wasn't returned for some reason
+                            window.location.href = 'success.html';
+                        }
                     } catch (err) {
                         console.error('Verification workflow error:', err);
                         errorDiv.textContent = `Verification Error: ${err.message}`;

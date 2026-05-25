@@ -49,12 +49,17 @@
             </div>
 
             <p style="color: var(--text-muted); font-size: 0.95rem;">
-                Your Cloasta Pro download link has also been sent to the email you provided.<br>
+                Your secure download link has also been sent to the email you provided.<br>
                 If you experience any issues, contact: <a href="mailto:cloastaofficial@gmail.com" style="color: var(--primary); text-decoration: none;">cloastaofficial@gmail.com</a>
             </p>
 
+            <div style="margin-top: 1rem; color: #ef4444; font-size: 0.85rem; font-weight: 500;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                For your security, this temporary link expires in <span id="countdown">10:00</span>.
+            </div>
+
             <div style="margin-top: 2rem;">
-                <a href="/cloasta-pro.zip" class="btn btn-secondary" id="manualDownloadBtn">Click here if download didn't start</a>
+                <a href="#" class="btn btn-secondary" id="manualDownloadBtn">Click here if download didn't start</a>
             </div>
         </div>
     </section>
@@ -69,17 +74,53 @@
 </footer>
 
 <script>
+    // Extract token from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    
+    // Construct the secure download API link
+    const secureDownloadUrl = token ? '/api/download-pro?token=' + encodeURIComponent(token) : '/api/download-pro';
+
+    // Update the manual download button
+    document.getElementById('manualDownloadBtn').href = secureDownloadUrl;
+
     // Automatically trigger the download
     window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
-            const link = document.createElement('a');
-            link.href = '/cloasta-pro.zip';
-            link.download = 'cloasta-pro.zip';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (token) {
+                const link = document.createElement('a');
+                link.href = secureDownloadUrl;
+                // Note: The filename is handled by the Content-Disposition header in the backend,
+                // but setting download attribute is good practice.
+                link.download = 'cloasta-pro.zip'; 
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                console.error('No secure token found in URL. Cannot auto-download.');
+                alert('No secure token found. Please check your email for the correct download link.');
+            }
         }, 1500); // Wait a tiny bit so the user sees the page
     });
+
+    // 10 minute countdown timer
+    let timeRemaining = 10 * 60; // 10 minutes in seconds
+    const countdownEl = document.getElementById('countdown');
+    
+    const timerInterval = setInterval(() => {
+        timeRemaining--;
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            countdownEl.textContent = '00:00 (Expired)';
+            countdownEl.style.color = '#dc2626';
+            document.getElementById('manualDownloadBtn').style.opacity = '0.5';
+            document.getElementById('manualDownloadBtn').style.pointerEvents = 'none';
+        } else {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
 </script>
 
 </body>

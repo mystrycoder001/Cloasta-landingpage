@@ -37,11 +37,20 @@ module.exports = async function handler(req, res) {
 
   console.log(`Payment verified successfully for order: ${razorpay_order_id}, payment: ${razorpay_payment_id}, email: ${email}`);
 
-  // 2. Determine App URL and Direct Download Link
-  const appUrl = process.env.APP_URL || (req.headers.host ? `https://${req.headers.host}` : 'https://cloasta.com');
-  const downloadLink = `${appUrl}/cloasta-pro.zip`;
+  // 2. Generate Secure Expiring Token
+  const timestamp = Date.now().toString();
+  const b64Timestamp = Buffer.from(timestamp).toString('base64');
+  const tokenHmac = crypto.createHmac('sha256', secret);
+  tokenHmac.update(b64Timestamp);
+  const signature = tokenHmac.digest('hex');
+  const generatedToken = `${b64Timestamp}.${signature}`;
 
-  // 3. Draft Email HTML content
+  // 3. Determine App URL and Secure Links
+  const appUrl = process.env.APP_URL || (req.headers.host ? `https://${req.headers.host}` : 'https://cloasta.com');
+  const directApiLink = `${appUrl}/api/download-pro?token=${generatedToken}`;
+  const successPageLink = `${appUrl}/success.html?token=${generatedToken}`;
+
+  // 4. Draft Email HTML content
   const emailHtml = `
   <!DOCTYPE html>
   <html>
@@ -192,14 +201,14 @@ module.exports = async function handler(req, res) {
         </div>
         
         <h1 class="hero-title">Your Cloasta Pro Download is Ready ✦</h1>
-        <p>Thank you for purchasing lifetime access to Cloasta Pro! Your extension ZIP package is ready for download. Please click the button below to retrieve your file.</p>
+        <p>Thank you for purchasing lifetime access to Cloasta Pro! Your secure extension package is ready for download.</p>
         
         <div class="button-container">
-          <a href="${downloadLink}" class="button">Download Cloasta Pro</a>
+          <a href="${successPageLink}" class="button">Download Cloasta Pro</a>
         </div>
         
         <div class="warning-box">
-          <strong>Important:</strong> Please uninstall the free version of Cloasta from your browser before installing Cloasta Pro to avoid extension conflicts.
+          <strong>Important Security Notice:</strong> This secure download link will expire in <strong>10 minutes</strong> for your protection. Please download your package immediately.
         </div>
 
         <div class="guide-section">
@@ -224,8 +233,8 @@ module.exports = async function handler(req, res) {
           </ul>
         </div>
 
-        <p>If the button doesn't work, you can copy and paste the following link into your browser:<br>
-        <span style="font-size: 13px; color: #6b7280; word-break: break-all;">${downloadLink}</span></p>
+        <p>If the button doesn't work, you can copy and paste the following secure link into your browser:<br>
+        <span style="font-size: 13px; color: #6b7280; word-break: break-all;">${successPageLink}</span></p>
 
         <p>If you have any questions, run into issues, or need support, feel free to contact us at <a class="support-link" href="mailto:cloastaofficial@gmail.com">cloastaofficial@gmail.com</a>.</p>
         
@@ -266,11 +275,11 @@ module.exports = async function handler(req, res) {
         throw new Error(data.message || 'Resend API returned an error');
       }
       console.log('Email sent successfully via Resend:', data.id);
-      return res.status(200).json({ success: true, message: 'Payment verified and email sent successfully via Resend.' });
+      return res.status(200).json({ success: true, message: 'Payment verified and email sent successfully via Resend.', token: generatedToken });
     } catch (err) {
       console.error('Resend delivery failed:', err.message);
       // Payment was verified — don't fail the whole thing, just warn about email
-      return res.status(200).json({ success: true, message: 'Payment verified successfully! Email delivery encountered an issue but your access is confirmed.', email_error: err.message });
+      return res.status(200).json({ success: true, message: 'Payment verified successfully! Email delivery encountered an issue but your access is confirmed.', token: generatedToken, email_error: err.message });
     }
   } else if (brevoKey) {
     // --- BREVO EMAIL DELIVERY ---
@@ -306,10 +315,10 @@ module.exports = async function handler(req, res) {
         throw new Error(`Brevo API returned status ${response.status}: ${errText}`);
       }
       console.log('Email sent successfully via Brevo.');
-      return res.status(200).json({ success: true, message: 'Payment verified and email sent successfully via Brevo.' });
+      return res.status(200).json({ success: true, message: 'Payment verified and email sent successfully via Brevo.', token: generatedToken });
     } catch (err) {
       console.error('Brevo delivery failed:', err.message);
-      return res.status(200).json({ success: true, message: 'Payment verified successfully! Email delivery encountered an issue but your access is confirmed.', email_error: err.message });
+      return res.status(200).json({ success: true, message: 'Payment verified successfully! Email delivery encountered an issue but your access is confirmed.', token: generatedToken, email_error: err.message });
     }
   } else {
     // --- NO EMAIL CONFIGURATION ---
@@ -317,7 +326,8 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message: 'Payment verified successfully! (Email delivery skipped: no email API key configured)',
-      download_link: downloadLink
+      download_link: successPageLink,
+      token: generatedToken
     });
   }
 };

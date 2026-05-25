@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Cloasta Free</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">Cloasta</a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 0;">
+    <section class="container" style="max-width: 800px;">
+        <div class="glass-panel" style="padding: 3rem; text-align: center; border-top: 4px solid var(--primary);">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(207, 188, 255, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Downloading Cloasta Free</h1>
+            <p style="font-size: 1.125rem; color: var(--text-main); margin-bottom: 2rem;">
+                Your download will begin automatically in a few seconds. Follow the steps below to install it.
+            </p>
+            
+            <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.02); text-align: left; margin-bottom: 2rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary);">Quick Installation Guide</h3>
+                <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-main); line-height: 1.8;">
+                    <li>Extract the downloaded <code>cloasta-free.zip</code> file to a folder on your computer.</li>
+                    <li>Open Google Chrome and navigate to <code>chrome://extensions</code> in the URL bar.</li>
+                    <li>Turn on <strong>Developer Mode</strong> using the toggle switch in the top-right corner.</li>
+                    <li>Click the <strong>Load Unpacked</strong> button and select the folder you extracted.</li>
+                </ol>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="/cloasta-free.zip" class="btn btn-secondary" id="manualDownloadBtn">Click here if the download didn't start</a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+                Want to supercharge your workflow? <a href="index.html#pricing" style="color: var(--primary); text-decoration: none;">Upgrade to Cloasta Pro</a> for unlimited history and optimization.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="container">
+    <div class="footer-content" style="border-top: none;">
+        <div style="text-align: center; width: 100%;">
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">© 2026 Cloasta. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Automatically trigger the download
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = '/cloasta-free.zip';
+            link.download = 'cloasta-free.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, 1500); // 1.5 seconds delay
+    });
+</script>
+
+</body>
+</html>
