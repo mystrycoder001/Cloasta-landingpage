@@ -39,7 +39,7 @@
             <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.02); text-align: left; margin-bottom: 2rem;">
                 <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary);">Quick Installation Guide</h3>
                 <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-main); line-height: 1.8;">
-                    <li>Extract the downloaded <code>cloasta-free.zip</code> file to a folder on your computer.</li>
+                    <li>Extract the downloaded <code>Cloasta-extention.zip</code> file to a folder on your computer.</li>
                     <li>Open Google Chrome and navigate to <code>chrome://extensions</code> in the URL bar.</li>
                     <li>Turn on <strong>Developer Mode</strong> using the toggle switch in the top-right corner.</li>
                     <li>Click the <strong>Load Unpacked</strong> button and select the folder you extracted.</li>
@@ -47,7 +47,7 @@
             </div>
 
             <div style="margin-top: 2rem;">
-                <a href="/cloasta-free.zip" class="btn btn-secondary" id="manualDownloadBtn">Click here if the download didn't start</a>
+                <a href="/Cloasta-extention.zip" class="btn btn-secondary" id="manualDownloadBtn">Click here if the download didn't start</a>
             </div>
             
             <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -70,8 +70,8 @@
     window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const link = document.createElement('a');
-            link.href = '/cloasta-free.zip';
-            link.download = 'cloasta-free.zip';
+            link.href = '/Cloasta-extention.zip';
+            link.download = 'Cloasta-extention.zip';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

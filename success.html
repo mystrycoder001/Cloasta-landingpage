@@ -41,7 +41,7 @@
             <div class="glass-panel" style="padding: 1.5rem; background: rgba(255,255,255,0.02); text-align: left; margin-bottom: 2rem;">
                 <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary);">Installation Guide</h3>
                 <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-main); line-height: 1.8;">
-                    <li>Extract the downloaded <code>cloasta-pro.zip</code> file to a folder.</li>
+                    <li>Extract the downloaded <code>Cloasta-extention - pro.zip</code> file to a folder.</li>
                     <li>Open Chrome and navigate to <code>chrome://extensions</code>.</li>
                     <li>Enable <strong>Developer Mode</strong> in the top-right corner.</li>
                     <li>Click <strong>Load Unpacked</strong> and select the extracted folder.</li>
@@ -91,8 +91,7 @@
                 const link = document.createElement('a');
                 link.href = secureDownloadUrl;
                 // Note: The filename is handled by the Content-Disposition header in the backend,
-                // but setting download attribute is good practice.
-                link.download = 'cloasta-pro.zip'; 
+                link.download = 'Cloasta-extention - pro.zip'; 
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);

@@ -216,7 +216,7 @@ module.exports = async function handler(req, res) {
           <ul class="steps">
             <li class="step-item">
               <span class="step-number">1</span>
-              Extract the downloaded <code>cloasta-pro.zip</code> file to a folder on your computer.
+              Extract the downloaded <code>Cloasta-extention - pro.zip</code> file to a folder on your computer.
             </li>
             <li class="step-item">
               <span class="step-number">2</span>

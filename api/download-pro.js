@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Serve the file
-    const filePath = path.join(process.cwd(), 'private', 'cloasta-pro.zip');
+    const filePath = path.join(process.cwd(), 'private', 'Cloasta-extention - pro.zip');
     
     if (!fs.existsSync(filePath)) {
       console.error('File not found:', filePath);
@@ -60,7 +60,7 @@ module.exports = async function handler(req, res) {
     res.writeHead(200, {
       'Content-Type': 'application/zip',
       'Content-Length': stat.size,
-      'Content-Disposition': 'attachment; filename="cloasta-pro.zip"'
+      'Content-Disposition': 'attachment; filename="Cloasta-extention - pro.zip"'
     });
 
     const readStream = fs.createReadStream(filePath);
