@@ -16,12 +16,12 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Missing plan_tier, email, or user_id' });
   }
 
-  // Pro Lifetime Access at ₹2,499 INR (249900 paise)
+  // Pro Lifetime Access at ₹749 INR (~$9 USD) (74900 paise)
   let amount;
   let currency = 'INR';
 
   if (plan_tier === 'pro') {
-      amount = 249900; // ₹2,499 INR
+      amount = 74900; // ₹749 INR (~$9 USD)
   } else if (plan_tier === 'ultra') {
       amount = 1599; // $15.99 USD (in cents)
       currency = 'USD';

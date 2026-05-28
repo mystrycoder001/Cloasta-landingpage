@@ -57,7 +57,7 @@ module.exports = async function handler(req, res) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cloasta Pro Download is Ready</title>
+    <title>Your Cloasta Download is Ready</title>
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -197,14 +197,14 @@ module.exports = async function handler(req, res) {
     <div class="wrapper">
       <div class="container">
         <div class="header">
-          <span class="logo">Cloasta<span>Pro</span> ✦</span>
+          <span class="logo">Cloasta ✦</span>
         </div>
         
-        <h1 class="hero-title">Your Cloasta Pro Download is Ready ✦</h1>
-        <p>Thank you for purchasing lifetime access to Cloasta Pro! Your secure extension package is ready for download.</p>
+        <h1 class="hero-title">Your Cloasta Download is Ready ✦</h1>
+        <p>Thank you for purchasing lifetime access to Cloasta! Your secure extension package is ready for download.</p>
         
         <div class="button-container">
-          <a href="${successPageLink}" class="button">Download Cloasta Pro</a>
+          <a href="${successPageLink}" class="button">Download Cloasta</a>
         </div>
         
         <div class="warning-box">
@@ -250,7 +250,7 @@ module.exports = async function handler(req, res) {
   // 4. Send Email using Resend or Brevo
   const resendKey = process.env.RESEND_API_KEY;
   const brevoKey = process.env.BREVO_API_KEY;
-  const emailFrom = process.env.EMAIL_FROM || 'Cloasta Pro <cloastaofficial@gmail.com>';
+  const emailFrom = process.env.EMAIL_FROM || 'Cloasta <cloastaofficial@gmail.com>';
 
   if (resendKey) {
     // --- RESEND EMAIL DELIVERY ---
@@ -265,7 +265,7 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({
           from: emailFrom,
           to: [email],
-          subject: 'Your Cloasta Pro Download is Ready ✦',
+          subject: 'Your Cloasta Download is Ready ✦',
           html: emailHtml
         })
       });
@@ -285,7 +285,7 @@ module.exports = async function handler(req, res) {
     // --- BREVO EMAIL DELIVERY ---
     try {
       console.log('Attempting to send email via Brevo...');
-      let senderName = 'Cloasta Pro';
+      let senderName = 'Cloasta';
       let senderEmail = 'noreply@cloasta.com';
       const fromMatch = emailFrom.match(/^(.*?)\s*<(.*?)>$/);
       if (fromMatch) {
@@ -305,7 +305,7 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({
           sender: { name: senderName, email: senderEmail },
           to: [{ email: email }],
-          subject: 'Your Cloasta Pro Download is Ready ✦',
+          subject: 'Your Cloasta Download is Ready ✦',
           htmlContent: emailHtml
         })
       });
