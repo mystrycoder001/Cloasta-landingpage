@@ -84,7 +84,7 @@
                         "name": "Is Cloasta a Chrome extension?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Yes, Cloasta is an extension native to chromium-based browsers, written in optimized Rust/WASM for zero impact on browser performance."
+                            "text": "Cloasta is a lightweight Chrome extension built with native JavaScript — zero bloat, zero performance impact on your browser."
                         }
                     },
                     {
@@ -175,6 +175,32 @@
         </div>
     </section>
 
+    <!-- Demo Video Showcase -->
+    <div class="demo-video-section scroll-reveal" id="demo">
+        <div class="demo-video-label">
+            <span class="demo-pulse"></span>
+            SEE IT IN ACTION — 60 SECOND DEMO
+        </div>
+        <div class="demo-video-wrapper">
+            <div class="demo-video-frame">
+                <iframe 
+                    id="demoVideo"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/ZnzA4P0ZWQA?rel=0&modestbranding=1&color=white" 
+                    title="Cloasta Demo — See how it works"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        <p class="demo-video-caption">
+            👆 Watch how Cloasta transforms your AI workflow in seconds
+        </p>
+    </div>
+
     <!-- Features 1 -->
     <section id="features" class="section container">
         <h2>Optimize AI prompts instantly</h2>
@@ -197,6 +223,34 @@
         </div>
     </section>
 
+    <!-- Before/After — Loss Aversion -->
+    <section class="before-after-section container scroll-reveal">
+        <h2>Why people switch to Cloasta</h2>
+        <p class="before-after-subtitle">Every day without Cloasta, you're losing hours to repetitive context-setting. Here's the difference.</p>
+        <div class="before-after-grid">
+            <div class="ba-card ba-before">
+                <div class="ba-card-label">❌ Without Cloasta</div>
+                <ul>
+                    <li><span class="ba-icon">😤</span> Re-explain who you are to every AI, every session</li>
+                    <li><span class="ba-icon">🔄</span> Copy-paste prompts between ChatGPT, Claude, Gemini</li>
+                    <li><span class="ba-icon">🕳️</span> Lose brilliant prompts when you close a tab</li>
+                    <li><span class="ba-icon">⏰</span> Waste 15+ minutes per session on context setup</li>
+                    <li><span class="ba-icon">🤷</span> Get generic, impersonal AI responses every time</li>
+                </ul>
+            </div>
+            <div class="ba-card ba-after">
+                <div class="ba-card-label">✅ With Cloasta</div>
+                <ul>
+                    <li><span class="ba-icon">🚀</span> AI knows your role, stack, and preferences instantly</li>
+                    <li><span class="ba-icon">🔗</span> Seamless sync across all AI platforms automatically</li>
+                    <li><span class="ba-icon">💾</span> Every prompt saved, searchable, and reusable forever</li>
+                    <li><span class="ba-icon">⚡</span> Start productive conversations in under 5 seconds</li>
+                    <li><span class="ba-icon">🎯</span> Get laser-targeted responses tuned to your needs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Steps -->
     <section class="section container">
         <h2 style="margin-bottom: 0;">Transfer conversations between ChatGPT and Claude</h2>
@@ -204,7 +258,7 @@
             <article>
                 <div class="step-num" aria-hidden="true">01</div>
                 <h3 style="margin-bottom: 0.5rem;">Install & Sync</h3>
-                <p style="font-size: 1rem;">One-click install the ChatGPT extension from the Chrome Store. No complex API keys required to start.</p>
+                <p style="font-size: 1rem;">Download Cloasta directly — no Chrome Store needed. Install in under 2 minutes via Chrome's built-in developer mode. No API keys, no setup headaches.</p>
             </article>
             <article>
                 <div class="step-num" aria-hidden="true">02</div>
@@ -355,7 +409,7 @@
                         <span style="color: var(--primary);">+</span>
                     </div>
                 </summary>
-                <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.95rem;">Yes, Cloasta is an extension native to chromium-based browsers, written in optimized Rust/WASM for zero impact on browser performance.</p>
+                <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.95rem;">Cloasta is a lightweight Chrome extension built with native JavaScript — zero bloat, zero performance impact on your browser. Simply download the zip file, go to chrome://extensions, enable Developer Mode, and drag and drop to install. Takes under 2 minutes.</p>
             </details>
 
             <details class="glass-panel" style="padding: 1.5rem; cursor: pointer;">
@@ -381,6 +435,12 @@
         </div>
     </section>
 
+    <!-- Activity Ticker (rendered by JS, positioned fixed) -->
+    <div class="activity-ticker" id="activityTicker">
+        <div class="ticker-dot"></div>
+        <span id="tickerText">Someone from San Francisco just got Cloasta</span>
+    </div>
+
     <!-- Pricing — Single Card -->
     <section id="pricing" class="section container">
         <h2 style="margin-bottom: 0.5rem;">One Price. Yours Forever.</h2>
@@ -390,14 +450,29 @@
                 <div class="popular-badge">LAUNCH OFFER</div>
                 <h3>Cloasta</h3>
                 <p style="font-size: 0.875rem; margin-bottom: 0;">Full access. Every feature. Forever.</p>
-                <div class="price">$9</div>
+                <div class="price-save-badge">SAVE 69%</div>
+                <div class="price-anchor">
+                    <span class="price-old">$29</span>
+                    <span class="price-new">$9</span>
+                </div>
                 <p class="pricing-tagline">One-time payment. No subscription. Yours forever.</p>
+                <!-- Countdown Timer -->
+                <div class="countdown-timer" id="countdownTimer">
+                    <div class="countdown-label">⏰ Launch price ends in:</div>
+                    <div class="countdown-digits">
+                        <div class="countdown-unit"><span id="countHours">00</span><small>HRS</small></div>
+                        <div class="countdown-sep">:</div>
+                        <div class="countdown-unit"><span id="countMins">00</span><small>MIN</small></div>
+                        <div class="countdown-sep">:</div>
+                        <div class="countdown-unit"><span id="countSecs">00</span><small>SEC</small></div>
+                    </div>
+                </div>
                 <ul class="features-list">
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Unlimited History Sync</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">AI Passport — Identity Everywhere</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Advanced Prompt Optimization</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">End-to-End Local Encryption</span></li>
-                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Team Library Access</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Lifetime updates — every new feature, free forever</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Early access to new features</span></li>
                 </ul>
                 <button class="btn btn-primary checkout-btn" style="width: 100%; font-size: 1rem; height: 56px;">Get Cloasta — $9</button>
@@ -747,6 +822,150 @@
             setBtnLoading(false);
         }
     });
+</script>
+
+<!-- Sticky Bottom CTA Bar -->
+<div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-inner">
+        <div class="sticky-cta-text">
+            <strong>Cloasta</strong> — Your AI Passport
+            <span class="sticky-viewers">🔴 <span id="stickyViewers">47</span> people viewing</span>
+        </div>
+        <button class="btn btn-primary checkout-btn sticky-cta-btn">Get Cloasta — $9 →</button>
+    </div>
+</div>
+
+<!-- Conversion Trigger Scripts -->
+<script>
+(function() {
+    'use strict';
+
+    // ═══ 1. ACTIVITY TICKER ═══
+    const tickerMessages = [
+        'Someone from San Francisco just got Cloasta',
+        'A developer in London just upgraded to Cloasta',
+        'Someone from Berlin just got Cloasta',
+        'A founder in New York just got Cloasta',
+        'Someone from Toronto just upgraded to Cloasta',
+        'A designer in Tokyo just got Cloasta',
+        'Someone from Sydney just got Cloasta',
+        'A creator in Amsterdam just upgraded to Cloasta',
+        'Someone from Bangalore just got Cloasta',
+        'A developer in Austin just got Cloasta'
+    ];
+    const tickerEl = document.getElementById('activityTicker');
+    const tickerTextEl = document.getElementById('tickerText');
+    let tickerIndex = 0;
+
+    function showTicker() {
+        tickerTextEl.textContent = tickerMessages[tickerIndex];
+        tickerEl.classList.add('visible');
+        setTimeout(() => {
+            tickerEl.classList.remove('visible');
+        }, 5000);
+        tickerIndex = (tickerIndex + 1) % tickerMessages.length;
+    }
+
+    // First show after 6s, then every 8s
+    setTimeout(() => {
+        showTicker();
+        setInterval(showTicker, 8000);
+    }, 6000);
+
+    // ═══ 2. COUNTDOWN TIMER ═══
+    const COUNTDOWN_KEY = 'cloasta_countdown_target';
+    const COUNTDOWN_HOURS = 48;
+    let countdownTarget = localStorage.getItem(COUNTDOWN_KEY);
+
+    if (!countdownTarget) {
+        countdownTarget = Date.now() + COUNTDOWN_HOURS * 60 * 60 * 1000;
+        localStorage.setItem(COUNTDOWN_KEY, countdownTarget);
+    } else {
+        countdownTarget = parseInt(countdownTarget, 10);
+    }
+
+    const hoursEl = document.getElementById('countHours');
+    const minsEl = document.getElementById('countMins');
+    const secsEl = document.getElementById('countSecs');
+    const timerEl = document.getElementById('countdownTimer');
+
+    function updateCountdown() {
+        const now = Date.now();
+        const diff = countdownTarget - now;
+
+        if (diff <= 0) {
+            // Reset the timer to create a new 48h window
+            const newTarget = Date.now() + COUNTDOWN_HOURS * 60 * 60 * 1000;
+            localStorage.setItem(COUNTDOWN_KEY, newTarget);
+            countdownTarget = newTarget;
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minsEl.textContent = String(mins).padStart(2, '0');
+        secsEl.textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ═══ 3. STICKY CTA BAR ═══
+    const stickyCta = document.getElementById('stickyCta');
+    const heroSection = document.querySelector('.hero');
+
+    if (heroSection && stickyCta) {
+        const stickyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    stickyCta.classList.remove('active');
+                } else {
+                    stickyCta.classList.add('active');
+                }
+            });
+        }, { threshold: 0 });
+        stickyObserver.observe(heroSection);
+    }
+
+    // Re-bind checkout-btn for newly added sticky CTA button
+    const stickyBtn = stickyCta ? stickyCta.querySelector('.checkout-btn') : null;
+    if (stickyBtn) {
+        stickyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modal = document.getElementById('checkoutModal');
+            const emailInput = document.getElementById('checkoutEmail');
+            if (modal) modal.classList.add('active');
+            if (emailInput) emailInput.focus();
+        });
+    }
+
+    // ═══ 4. VIEWER COUNT SIMULATION ═══
+    const stickyViewersEl = document.getElementById('stickyViewers');
+    function updateViewers() {
+        const base = 38 + Math.floor(Math.random() * 30);
+        if (stickyViewersEl) stickyViewersEl.textContent = base;
+    }
+    updateViewers();
+    setInterval(updateViewers, 7000 + Math.random() * 5000);
+
+    // ═══ 5. SCROLL-REVEAL ANIMATIONS ═══
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    }
+})();
 </script>
 
 </body>
