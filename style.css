@@ -520,11 +520,36 @@ p {
   margin-top: 2rem;
 }
 
+/* Pricing — Two Column Grid (Free vs Pro) */
+.pricing-grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 2rem auto 0;
+  align-items: start;
+}
+
 .pricing-card {
   padding: 3rem;
   position: relative;
   width: 100%;
   max-width: 480px;
+}
+
+/* Disabled / excluded feature items */
+.features-list li.feature-disabled {
+  opacity: 0.35;
+}
+
+.features-list li.feature-disabled svg {
+  stroke: var(--text-muted);
+}
+
+.features-list li.feature-disabled span {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.15);
 }
 
 .pricing-card.popular {
@@ -698,6 +723,10 @@ footer {
   .nav-links { display: none; }
   .grid-cols-2, .grid-cols-3, .features-grid, .steps-grid, .bento-grid, .testimonials-grid {
     grid-template-columns: 1fr;
+  }
+  .pricing-grid-two {
+    grid-template-columns: 1fr;
+    max-width: 480px;
   }
   .bento-wide, .bento-small {
     grid-column: span 1;

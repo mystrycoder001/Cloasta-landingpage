@@ -123,7 +123,10 @@
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
-            <button class="btn btn-primary nav-cta checkout-btn" style="text-decoration: none;">Get Cloasta — $9</button>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="free-download.html" class="btn btn-secondary nav-cta" style="text-decoration: none;">Try Free</a>
+                <button class="btn btn-primary nav-cta checkout-btn" style="text-decoration: none;">Get Pro — $9</button>
+            </div>
         </div>
     </nav>
 </header>
@@ -156,9 +159,13 @@
 
         <div class="hero-actions">
             <button class="btn btn-primary btn-lg checkout-btn" id="heroCta">
-                Get Cloasta — $9
+                Get Cloasta Pro — $9
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </button>
+            <a href="free-download.html" class="btn btn-secondary btn-lg" id="heroFree">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download Free
+            </a>
         </div>
         <p class="hero-urgency">⚡ Early launch price — goes up soon</p>
         
@@ -458,19 +465,39 @@
 
     <!-- Pricing — Single Card -->
     <section id="pricing" class="section container">
-        <h2 style="margin-bottom: 0.5rem;">One Price. Yours Forever.</h2>
-        <p style="text-align: center; margin-bottom: 3rem; max-width: 500px; margin-left: auto; margin-right: auto;">No tiers. No subscriptions. Just one simple payment for lifetime access.</p>
-        <div class="pricing-single">
+        <h2 style="margin-bottom: 0.5rem;">Start Free. Go Pro When Ready.</h2>
+        <p style="text-align: center; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Try Cloasta free with core features, or unlock the full experience with a one-time Pro upgrade.</p>
+        <div class="pricing-grid-two">
+            <!-- FREE TIER -->
+            <article class="pricing-card glass-panel" id="pricingFreeCard">
+                <h3>Free</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0;">Get started with core features.</p>
+                <div class="price-anchor">
+                    <span class="price-new">$0</span>
+                </div>
+                <p class="pricing-tagline">Free forever. No credit card.</p>
+                <ul class="features-list">
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Multi-AI Support (ChatGPT, Claude, Gemini)</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Prompt Capture — 5/day</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">History Sync — 3 sessions</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Local Storage & Privacy</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Side Panel Interface</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Access to all Modes</span></li>
+                </ul>
+                <a href="free-download.html" class="btn btn-secondary" style="width: 100%; font-size: 1rem; height: 56px; text-decoration: none;" id="pricingFreeBtn">Download Free</a>
+            </article>
+
+            <!-- PRO TIER -->
             <article class="pricing-card glass-panel popular" id="pricingCard">
-                <div class="popular-badge">LAUNCH OFFER</div>
-                <h3>Cloasta</h3>
+                <div class="popular-badge">MOST POPULAR</div>
+                <h3>Pro</h3>
                 <p style="font-size: 0.875rem; margin-bottom: 0;">Full access. Every feature. Forever.</p>
                 <div class="price-save-badge">SAVE 69%</div>
                 <div class="price-anchor">
                     <span class="price-old">$29</span>
                     <span class="price-new">$9</span>
                 </div>
-                <p class="pricing-tagline">One-time payment. No subscription. Yours forever.</p>
+                <p class="pricing-tagline">Less than one coffee. Works across every AI. Forever.</p>
                 <!-- Countdown Timer -->
                 <div class="countdown-timer" id="countdownTimer">
                     <div class="countdown-label">⏰ Launch price ends in:</div>
@@ -483,14 +510,15 @@
                     </div>
                 </div>
                 <ul class="features-list">
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Everything in Free, plus:</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Unlimited Prompt Capture</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Unlimited History Sync</span></li>
-                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">AI Passport — Identity Everywhere</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">AI Passport — Export & Sync Identity</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Advanced Prompt Optimization</span></li>
                     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">End-to-End Local Encryption</span></li>
-                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Lifetime updates — every new feature, free forever</span></li>
-                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Early access to new features</span></li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg> <span style="color: var(--text-main);">Lifetime updates & early access</span></li>
                 </ul>
-                <button class="btn btn-primary checkout-btn" style="width: 100%; font-size: 1rem; height: 56px;">Get Cloasta — $9</button>
+                <button class="btn btn-primary checkout-btn" style="width: 100%; font-size: 1rem; height: 56px;">Get Pro — $9</button>
                 <p class="pricing-urgency">⚡ Early launch price — goes up soon</p>
             </article>
         </div>
@@ -504,9 +532,12 @@
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">Stop repeating yourself. Get Cloasta and let every AI remember who you are, what you do, and how you work.</p>
                 <div class="hero-actions" style="margin-bottom: 0;">
                     <button class="btn btn-primary btn-lg checkout-btn" style="background: white; color: black; border-color: white; box-shadow: 0 0 30px rgba(255,255,255,0.15);">
-                        Get Cloasta — $9
+                        Get Pro — $9
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
                     </button>
+                    <a href="free-download.html" class="btn btn-secondary btn-lg" style="border-color: rgba(255,255,255,0.3); color: white;">
+                        Or Try Free
+                    </a>
                 </div>
             </div>
         </div>
@@ -574,7 +605,7 @@
             
             <!-- CTA Button -->
             <button id="continuePaymentBtn" class="btn btn-primary modal-btn">
-                <span class="btn-text">Get Cloasta — $9</span>
+                <span class="btn-text">Get Pro — $9</span>
                 <span class="btn-spinner" style="display: none;">
                     <svg class="spinner" viewBox="0 0 50 50">
                         <circle class="path" cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4"></circle>
@@ -846,7 +877,8 @@
             <strong>Cloasta</strong> — Your AI Passport
             <span class="sticky-viewers">🔴 <span id="stickyViewers">47</span> people viewing</span>
         </div>
-        <button class="btn btn-primary checkout-btn sticky-cta-btn">Get Cloasta — $9 →</button>
+        <a href="free-download.html" class="btn btn-secondary sticky-cta-btn" style="text-decoration: none; white-space: nowrap;">Try Free</a>
+        <button class="btn btn-primary checkout-btn sticky-cta-btn">Get Pro — $9 →</button>
     </div>
 </div>
 
